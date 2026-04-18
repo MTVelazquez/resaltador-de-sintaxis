@@ -1,0 +1,4 @@
+(define (prueba x) 
+    (if (equal x 10)
+        (display (x igual a 10))
+        (display “x diferente de 10”))) $

@@ -14,18 +14,22 @@
 # Al finalizar genera un archivo HTML con la sintaxis resaltada.
 #
 # Autores: Marcelo Treviño Velazquez  - A01286389
-#          Ilan
+#          Ilan David Narváez Martínez - A01412672
 #          Ringo Emiliano Garcia Gastelum - A01743951
 #
 # Materia: TC2037 Implementación de Métodos Computacionales
 # Actividad 3.2 - Resaltador de Sintaxis
 # =============================================================================
 
+import os
 import sys
-import obten_token as scanner
+from . import obten_token as scanner
 
 # Token actual
 token = None
+
+# Variable global para guardar la ruta destino del HTML
+ruta_destino_html = "resalta_sintaxis.html"
 
 # ===================== EMPATE DE TOKENS ======================================
 
@@ -107,20 +111,21 @@ def generar_html():
             '    <link rel="stylesheet" href="resalta_sintaxis.css">\n'
             '</head>\n<body>\n<pre>' + scanner.get_html() + '</pre>\n'
             '</body>\n</html>\n')
-    with open("resalta_sintaxis.html", "w", encoding="utf-8") as f:
+    
+    with open(ruta_destino_html, "w", encoding="utf-8") as f:
         f.write(html)
 
 # ===================== MANEJO DE ERRORES =====================================
 
 def error_lexico():
-    """Agrega leyenda de error lexico al HTML, genera el archivo y aborta."""
+    # Agrega leyenda de error lexico al HTML, genera el archivo y aborta.
     info = scanner.escape_html(scanner.error_info.strip())
     scanner.add_html(' <span class="error-msg">==&gt; error de l\u00e9xico en ' + info + '</span>')
     generar_html()
     sys.exit(1)
 
 def error_sintactico():
-    """Agrega leyenda de error sintactico al HTML, genera el archivo y aborta."""
+    # Agrega leyenda de error sintactico al HTML, genera el archivo y aborta.
     info = scanner.escape_html(scanner.lexema.strip())
     scanner.add_html(' <span class="error-msg">==&gt; error de sint\u00e1xis en ' + info + '</span>')
     generar_html()
@@ -128,7 +133,14 @@ def error_sintactico():
 
 # ===================== FUNCION PRINCIPAL =====================================
 
-def parser():
+def parser(ruta_html: str = ".", nombre_html: str = "resalta_sintaxis"):
+    global ruta_destino_html
+    ruta_destino_html = os.path.join(ruta_html, f"{nombre_html}.html")
+
+    nomb_documento = "documento.txt"
+    ruta_documento = os.path.normpath(os.path.join(os.getcwd(), "docs", nomb_documento))
+    scanner.set_documento_input(ruta_documento, True)
+
     """Funcion principal: inicia el analisis lexico-sintactico y genera HTML."""
     global token
     token = scanner.obten_token()   # obtener el primer token
@@ -137,6 +149,9 @@ def parser():
     prog()                          # iniciar reconocimiento del programa
     if token != scanner.END:
         error_sintactico()
+    
+    scanner.set_documento_input("", False)
     generar_html()                  # escribir el archivo HTML final
 
-parser()
+if __name__ == "__main__":
+    parser()

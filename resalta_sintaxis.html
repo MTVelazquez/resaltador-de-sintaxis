@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="resalta_sintaxis.css">
 </head>
 <body>
-<pre><span class="simbolo">atomo</span> <span class="numero">25</span> <span class="booleano">#t</span> <span class="string">“hola amigo”</span>
-<span class="parentesis">(</span><span class="parentesis">(</span><span class="numero">1</span> <span class="numero">2</span><span class="parentesis">)</span><span class="parentesis">(</span><span class="booleano">#f</span> <span class="booleano">#t</span><span class="parentesis">)</span><span class="parentesis">)</span> <span class="simbolo">es</span> <span class="simbolo">una</span> <span class="string">“lista anidada”</span>
-<span class="parentesis">(</span><span class="simbolo">display</span> <span class="parentesis">(</span><span class="simbolo">x</span> <span class="simbolo">igual</span> <span class="simbolo">a</span> <span class="numero">10</span><span class="parentesis">)</span><span class="parentesis">)</span>
-<span class="simbolo">atomo</span> <span class="numero">25</span> <span class="error"># </span> <span class="error-msg">==&gt; error de léxico en # &lt;==</span></pre>
+<pre><span class="parentesis">(</span><span class="simbolo">define</span> <span class="parentesis">(</span><span class="simbolo">prueba</span> <span class="simbolo">x</span><span class="parentesis">)</span> 
+    <span class="parentesis">(</span><span class="simbolo">if</span> <span class="parentesis">(</span><span class="simbolo">equal</span> <span class="simbolo">x</span> <span class="numero">10</span><span class="parentesis">)</span>
+        <span class="parentesis">(</span><span class="simbolo">display</span> <span class="parentesis">(</span><span class="simbolo">x</span> <span class="simbolo">igual</span> <span class="simbolo">a</span> <span class="numero">10</span><span class="parentesis">)</span><span class="parentesis">)</span>
+        <span class="parentesis">(</span><span class="simbolo">display</span> <span class="string">“x diferente de 10”</span><span class="parentesis">)</span><span class="parentesis">)</span><span class="parentesis">)</span> <span class="fin">$</span></pre>
 </body>
 </html>
